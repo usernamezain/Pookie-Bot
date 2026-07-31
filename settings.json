@@ -1,0 +1,11 @@
+{
+<<<<<<< HEAD
+    "antidelete": "on",
+    "public_mode": true,
+    "hidden_categories": [
+        "downloader"
+    ]
+=======
+    "antidelete": "on"
+>>>>>>> origin/master
+}

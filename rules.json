@@ -1,0 +1,11 @@
+{
+  "project_rules": [
+    "DO NOT modify the pairing code logic or scheme. It is currently working perfectly.",
+    "NEVER change the pairing code scheme.",
+    "Consult the USER before making any changes to the authentication or connection flow.",
+    "PLUGIN ARCHITECTURE: Always create new plugins in a new folder organized by category.",
+    "PLUGIN CONNECTION: Every new plugin must be properly connected/imported into the main handler/file.",
+    "COMMAND ISOLATION: Every plugin command must reside in its own folder and file for maximum organization.",
+    "STABILITY: NEVER change previous logic that could lead to crashes or regressions. Maintain existing functionality while adding new features."
+  ]
+}
