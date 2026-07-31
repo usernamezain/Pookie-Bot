@@ -2,7 +2,6 @@ const { getCoreMessage, downloadMedia } = require("./lib/utils");
 const fs = require("fs-extra");
 const path = require("path");
 const { jidNormalizedUser } = require("@whiskeysockets/baileys");
-<<<<<<< HEAD
 const store = require("./lib/store");
 const config = require("./config");
 const mirrorLib = require("./lib/mirror");
@@ -76,10 +75,6 @@ autorunLib.setRunFunction(async (chatJid, commandStr, sock) => {
   await plugin.execute(sock, fakeM, args, config);
 });
 autorunLib.startPoller();
-=======
-
-const settingsPath = path.join(__dirname, "settings.json");
->>>>>>> origin/master
 
 async function handleMessage(sock, m) {
   if (!m.message) return;
@@ -92,15 +87,10 @@ async function handleMessage(sock, m) {
   const isGroup = from.endsWith("@g.us");
   const sender = isGroup ? m.key.participant : from;
   const fromMe = m.key.fromMe;
-<<<<<<< HEAD
-  
   // Increment message count for ranking
   if (isGroup && sender) {
     await store.incrementMessageCount(from, sender);
   }
-
-=======
->>>>>>> origin/master
   const body =
     m.message.conversation ||
     m.message.extendedTextMessage?.text ||
@@ -109,7 +99,6 @@ async function handleMessage(sock, m) {
     "";
   const prefix = ".";
 
-<<<<<<< HEAD
   // Check Bot Mode (Public vs Self)
   const settings = await fs.readJson(settingsPath).catch(() => ({ public_mode: true }));
   if (settings.public_mode === false && !fromMe) return;
@@ -152,14 +141,10 @@ async function handleMessage(sock, m) {
     const isLink = await checkAntiLink(sock, m, from, sender, body);
     if (isLink) return; // Stop processing if link was detected and handled
   }
-=======
-  if (!body.startsWith(prefix)) return;
->>>>>>> origin/master
 
   const args = body.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
 
-<<<<<<< HEAD
   // ── Chat logging: capture all messages for .chatextract ───────────────
   const msgType = body ? "text"
     : m.message?.imageMessage ? "image"
@@ -196,9 +181,6 @@ async function handleMessage(sock, m) {
   }
 
   // 2. Built-in Commands logic
-=======
-  // Commands logic
->>>>>>> origin/master
   switch (command) {
     case "menu":
     case "help":
@@ -242,17 +224,13 @@ async function handleMessage(sock, m) {
     case "antidelete":
       await cmdAntiDelete(sock, m, from, args);
       break;
-<<<<<<< HEAD
     case "hidemenu":
       await cmdHideMenu(sock, m, from, args);
       break;
-=======
->>>>>>> origin/master
   }
 }
 
 async function cmdMenu(sock, m, from) {
-<<<<<<< HEAD
   const settings = await fs.readJson(settingsPath).catch(() => ({}));
   const hiddenCategories = settings.hidden_categories || [];
 
@@ -335,37 +313,11 @@ async function cmdHideMenu(sock, m, from, args) {
     await fs.writeJson(settingsPath, settings, { spaces: 4 });
     await sock.sendMessage(from, { text: `✅ Category *${category}* is now VISIBLE in the menu.` }, { quoted: m });
   }
-=======
-  const menuText = `
-╭─── *POOKIE BOT* ───╮
-│
-│ *INFO:*
-│ 🤖 *.menu* / *.help*
-│ ⚡ *.ping*
-│ 🕒 *.runtime*
-│ 
-│ *TOOLS:*
-│ 🗑️ *.del* / *.delete* (reply)
-│ 👁️ *.vv* (decrypted to YOU)
-│ 📥 *.save* / *.status* (reply)
-│ 🔑 *.session*
-│
-│ *ADMIN:*
-│ 🛡️ *.antidelete* [on/off/my]
-│
-╰───────────────────╯
-`.trim();
-  await sock.sendMessage(from, { text: menuText }, { quoted: m });
->>>>>>> origin/master
 }
 
 async function cmdSession(sock, m, from) {
   try {
-<<<<<<< HEAD
-=======
-    const path = require("path");
-    const fs = require("fs-extra");
->>>>>>> origin/master
+
     const sessionDir = path.join(__dirname, "session");
     const credsFile = path.join(sessionDir, "creds.json");
 
@@ -569,7 +521,6 @@ async function cmdStatus(sock, m, from) {
   }
 }
 
-<<<<<<< HEAD
 async function checkAntiLink(sock, m, from, sender, body) {
   const linkRegex = /(https?:\/\/[^\s]+)/gi;
   if (!linkRegex.test(body)) return false;
@@ -626,7 +577,3 @@ async function checkAntiLink(sock, m, from, sender, body) {
 }
 
 module.exports = { handleMessage, cmdMenu };
-
-=======
-module.exports = { handleMessage };
->>>>>>> origin/master

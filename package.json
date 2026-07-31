@@ -7,7 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-<<<<<<< HEAD
     "@justalk/pornhub-api": "^3.5.0",
     "@whiskeysockets/baileys": "^6.6.0",
     "adm-zip": "^0.5.17",
@@ -26,16 +25,6 @@
     "readline": "^1.3.0",
     "whois": "^2.16.1",
     "wikijs": "^6.4.1"
-=======
-    "@whiskeysockets/baileys": "^6.6.0",
-    "pino": "^8.15.0",
-    "pino-pretty": "^10.2.0",
-    "readline": "^1.3.0",
-    "fs-extra": "^11.3.3",
-    "file-type": "^16.5.4",
-    "node-cache": "^5.1.2",
-    "axios": "^1.6.0"
->>>>>>> origin/master
   },
   "author": "Zain Mughal",
   "license": "MIT"

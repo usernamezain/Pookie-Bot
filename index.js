@@ -1,12 +1,8 @@
-<<<<<<< HEAD
 require("dotenv").config();
 
 // Override ISP DNS blocking — use Google + Cloudflare public DNS
 const dns = require("dns");
 dns.setServers(["8.8.8.8", "1.1.1.1", "8.8.4.4"]);
-
-=======
->>>>>>> origin/master
 const {
   default: makeWASocket,
   useMultiFileAuthState,
@@ -25,7 +21,6 @@ const path = require("path");
 const fs = require("fs-extra");
 const readline = require("readline");
 const NodeCache = require("node-cache");
-<<<<<<< HEAD
 const { handleMessage, cmdMenu } = require("./handler");
 const trackerLib = require("./lib/tracker");
 
@@ -72,15 +67,6 @@ const processedMessages = new NodeCache({ stdTTL: 300 });
 // ── Reconnect state ───────────────────────────────────────────────────────────
 let menuSentOnce = false;       // Only send menu on first connect
 let lastReconnectTime = 0;      // Prevent rapid reconnect loops
-=======
-const { handleMessage } = require("./handler");
-
-const logger = pino({ level: "silent" });
-const msgRetryCounterCache = new NodeCache();
-const messageStore = new Map(); // Store full message data
-const processedRevokes = new Set(); // Prevent duplicate revoke alerts
-const processedMessages = new NodeCache({ stdTTL: 300 }); // Deduplicate messages within 5 mins
->>>>>>> origin/master
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -109,27 +95,18 @@ async function startBot() {
     version,
     auth: {
       creds: state.creds,
-<<<<<<< HEAD
       keys: makeCacheableSignalKeyStore(state.keys, filteredLogger),
     },
     logger: filteredLogger,
-=======
-      keys: makeCacheableSignalKeyStore(state.keys, logger),
-    },
-    logger,
->>>>>>> origin/master
     browser: Browsers.ubuntu("Chrome"),
     printQRInTerminal: false,
     msgRetryCounterCache,
     markOnlineOnConnect: true,
-<<<<<<< HEAD
     retryRequestDelayMs: 2000,   // wait 2s before retry on failure
     maxMsgRetryCount: 3,         // max 3 retries per message
     fireInitQueries: true,
     connectTimeoutMs: 60000,
     keepAliveIntervalMs: 25000,
-=======
->>>>>>> origin/master
   });
 
   isStarting = false;
@@ -206,7 +183,6 @@ async function startBot() {
     const { connection, lastDisconnect } = update;
     if (connection === "close") {
       const statusCode = lastDisconnect?.error?.output?.statusCode;
-<<<<<<< HEAD
       const reason = Object.entries(DisconnectReason).find(([, v]) => v === statusCode)?.[0] || "Unknown";
       const shouldReconnect = statusCode !== DisconnectReason.loggedOut && statusCode !== 401;
 
@@ -224,25 +200,12 @@ async function startBot() {
         lastReconnectTime = now;
         console.log(`\x1b[33m[RECONNECT]\x1b[0m Waiting ${reconnectDelay / 1000}s...`);
         setTimeout(() => startBot(), reconnectDelay);
-=======
-      const shouldReconnect =
-        statusCode !== DisconnectReason.loggedOut && statusCode !== 401; // Avoid loop on authentication failure
-
-      console.log(
-        `Connection lost (Reason: ${lastDisconnect.error?.message}). Reconnecting: ${shouldReconnect}`,
-      );
-
-      if (shouldReconnect) {
-        setTimeout(() => startBot(), 5000); // Add a delay before reconnecting
->>>>>>> origin/master
       }
     } else if (connection === "open") {
       console.clear();
       console.log("\x1b[32m%s\x1b[0m", "--- POOKIE BOT CONNECTED ---");
       const userId = jidNormalizedUser(sock.user.id);
       console.log(`Logged in as: ${userId}`);
-<<<<<<< HEAD
-
       // Only send menu on the very first successful connection
       if (!menuSentOnce) {
         menuSentOnce = true;
@@ -256,31 +219,6 @@ async function startBot() {
 
       // Re-subscribe to tracked contacts (non-blocking)
       trackerLib.resubscribeAll(sock).catch(() => {});
-=======
-      console.log("Commands: .del, .vv, .save (use on status)");
-
-      // Session ID Creation
-      try {
-        const credsFile = path.join(sessionDir, "creds.json");
-        if (fs.existsSync(credsFile)) {
-          const credsData = await fs.readFile(credsFile, "utf-8");
-          const sessionId =
-            "POOKIE~" + Buffer.from(credsData).toString("base64");
-
-          console.log("\x1b[35m%s\x1b[0m", "\n--- SESSION ID GENERATED ---");
-          console.log(sessionId);
-          console.log("----------------------------\n");
-
-          // Send session ID to the user
-          await sock.sendMessage(userId, {
-            text: `*Successfully Connected!*\n\n*Session ID:* \`${sessionId}\`\n\nKeep this safe and do not share it with anyone.`,
-          });
-          console.log("Session ID sent to your WhatsApp number.");
-        }
-      } catch (sessionErr) {
-        console.error("Error generating session ID:", sessionErr.message);
-      }
->>>>>>> origin/master
     }
   });
 
@@ -458,8 +396,6 @@ async function startBot() {
       await handleMessage(sock, msg);
     }
   });
-<<<<<<< HEAD
-
   // ── Presence tracking (for .track / .onlineping / .lastseen) ─────────────
   sock.ev.on("presence.update", async ({ id, presences }) => {
     await trackerLib.handlePresenceUpdate(sock, id, presences);
@@ -506,17 +442,6 @@ process.on("uncaughtException", (err) => {
   if (isKnownTransient(err)) return; // Silently ignore
   console.error("\x1b[31m[FATAL]\x1b[0m Uncaught Exception:", err.message);
   console.error(err.stack);
-=======
-}
-
-// Global Error Handling
-process.on("unhandledRejection", (reason, promise) => {
-  console.error("Unhandled Rejection at:", promise, "reason:", reason);
-});
-
-process.on("uncaughtException", (err) => {
-  console.error("Uncaught Exception:", err);
->>>>>>> origin/master
 });
 
 startBot().catch((err) => console.error("Startup Failure:", err));
