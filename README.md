@@ -12,10 +12,10 @@
 
 For full detailed setup, activation, and 24/7 server hosting instructions, check out the dedicated step-by-step documentation:
 
-- 💻 **[Local Setup & Activation Guide](file:///C:/Users/SHABBIR%20TRADERS/Desktop/Bot/Panel%20Web/Whatsapp-bots/Pookie-Bot-master/Pookie-Bot-master/RUN_LOCALLY.md)** (`RUN_LOCALLY.md`)
+- 💻 **[Local Setup & Activation Guide](https://github.com/usernamezain/Pookie-Bot/blob/main/RUN_LOCALLY.md)** (`RUN_LOCALLY.md`)
   *Complete guide to install, configure environment variables, pair via phone number, and run locally on Windows, macOS, or Linux.*
 
-- 🚀 **[24/7 VPS & Railway Hosting Guide](file:///C:/Users/SHABBIR%20TRADERS/Desktop/Bot/Panel%20Web/Whatsapp-bots/Pookie-Bot-master/Pookie-Bot-master/HOSTING_GUIDE.md)** (`HOSTING_GUIDE.md`)
+- 🚀 **[24/7 VPS & Railway Hosting Guide](https://github.com/usernamezain/Pookie-Bot/blob/main/HOSTING_GUIDE.md)** (`HOSTING_GUIDE.md`)
   *Detailed step-by-step instructions to host Pookie Bot 24/7 on Linux VPS servers (using PM2) or on Railway cloud platform with persistent session storage.*
 
 ---
