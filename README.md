@@ -87,6 +87,7 @@ OWNER_NAME=Mughal Dev
 GURU_API_KEY=guru
 GIFTED_API_KEY=gifted
 THUMBNAIL_URL=https://picsum.photos/seed/pookiebot/400/400
+SMVD_KEY= Get the all social media downloader API key from the "rapidapi.com" and paste it here
 ```
 
 ### `settings.json` File
