@@ -86,7 +86,7 @@ OWNER_NAME=Mughal Dev
 GURU_API_KEY=guru
 GIFTED_API_KEY=gifted
 THUMBNAIL_URL=https://picsum.photos/seed/pookiebot/400/400
-SMVD_KEY=5dc721e18cmsh0d6b0f2e1b1f59cp1e000ajsnedde84a4491a
+SMVD_KEY=
 ```
 Save and exit (`Ctrl + O`, `Enter`, `Ctrl + X`).
 
